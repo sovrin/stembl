@@ -1,21 +1,20 @@
 import React from 'react';
 import {Box, Text} from 'ink';
-import {useI18n} from '../hooks';
+import {useI18n} from 'hooks';
+import {Props} from 'types/contexts';
 
 /**
  *
  * @param data
  * @constructor
  */
-const Help = ({data}) => {
-
-    const {getHelpText} = useI18n({
-        getHelpText: (key) => {
-            return key.slice(1);
-        },
+const Help = ({data}: Props) => {
+    const {commands} = data;
+    const {generate} = useI18n({
+        generate: (key) => key.slice(1),
     });
 
-    const [maxMargin] = data.map(([command]) => command)
+    const [maxMargin] = commands.map(({command}) => command)
         .map((command) => command.length)
         .sort()
         .reverse()
@@ -26,7 +25,7 @@ const Help = ({data}) => {
      * @param command
      * @param text
      */
-    const build = ([command, helpKey]) => {
+    const build = ({command, help}) => {
         const margin = maxMargin - command.length + 3;
 
         return (
@@ -40,13 +39,13 @@ const Help = ({data}) => {
                     </Text>
                 </Box>
                 <Text>
-                    {getHelpText(helpKey)}
+                    {generate(help)}
                 </Text>
             </Box>
         );
     };
 
-    const children = data.map(build);
+    const children = commands.map(build);
 
     return (
         <Box flexDirection="column">

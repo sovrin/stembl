@@ -6,12 +6,14 @@ import {useDatabase} from 'hooks';
  *
  * @constructor
  */
-const In = () => {
-    const {bootstrap} = useDatabase();
+const In = (props) => {
+    // const {bootstrap} = useDatabase();
 
-    bootstrap('week').then((week) => {
-        console.info(week);
-    });
+    // bootstrap('setting').then((week) => {
+    //
+    //     console.info(week);
+    //     // week.wurst();
+    // });
 
     return (
         <Text>
