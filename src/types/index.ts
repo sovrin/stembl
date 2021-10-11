@@ -1,2 +1,3 @@
-export * from './App';
-export * from './Config';
+export * as collections from './collections';
+export * as contexts from './contexts';
+export * as services from './services';
