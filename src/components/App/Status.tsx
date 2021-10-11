@@ -1,18 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Text} from 'ink';
-import {useI18n} from 'hooks';
+import {useDatabase, useI18n} from 'hooks';
 import {timer} from 'services';
+import Spinner from '../Spinner';
 
 /**
  *
  * @constructor
  */
 const Status = () => {
-    const [tick, setTick] = useState(null);
-
-    const {status} = useI18n({
-        status: (status, ...parameters) => [['status', 'signed', status].join('.'), parameters],
+    const state = useRef({
+        isLoading: true,
     });
+    // const [tick, setTick] = useState(null);
+
+    const {generate} = useI18n({
+        generate: (status, ...parameters) => [['status', 'signed', status].join('.'), parameters],
+    });
+
+    console.info('render');
 
     // useEffect(() => {
     //     const controller = new AbortController();
@@ -25,7 +31,8 @@ const Status = () => {
 
     return (
         <Text color="green">
-            status: {tick}
+            {/*status: {tick}*/}
+            <Spinner isLoading={state.current.isLoading}/>
         </Text>
     );
 };
