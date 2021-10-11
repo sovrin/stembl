@@ -22,7 +22,7 @@ const Database = ({children}) => {
      *
      * @param name
      */
-    const bootstrap = (name) => {
+    const bootstrap = <T extends unknown>(name: string): Promise<T> => {
         if (!cache.current[name]) {
             cache.current[name] = collections[name](db);
         }
