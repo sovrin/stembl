@@ -1,8 +1,11 @@
-type Help = (help: string) => string
+type Flag = [
+    flag: string,
+    path: string,
+    about: string
+];
 
-type Flags = (flags: object) => void
-
-export type Command = (
-    help: Help,
-    flags: Flags,
-) => void;
+export type Command = {
+    command: string,
+    flags: Flag[],
+    help: string,
+}
